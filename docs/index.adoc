@@ -1,0 +1,55 @@
+= Version API
+Anthony Ikeda <anthony.ikeda@cognizant.com>
+:source-highlighter: prettify
+:icons: font
+
+[source,java]
+----
+public class Customer {
+    private int id; // <.>
+
+    private String firstName;
+
+    private String lastName;
+
+    private String city; // <.>
+}
+----
+<.> This is the primary key
+<.> This is the original property for city
+
+When we migrate we end up with the new `Address` class:
+
+[source,java]
+----
+public class Address {
+
+    @Id
+    private long addressId; <.>
+
+    @Column(name="street_1")
+    private String street1;
+
+    @Column(name="street_2")
+    private String street2;
+
+    @Column(name="city")
+    private String city; <.>
+}
+----
+<.> We populate this with the original `customerId`
+<.> and move the `Customer.city` value to here.
+
+
+WARNING: Anyway what was I saying?
+
+CAUTION: This is a caution
+
+IMPORTANT: If you really need to go you must go!
+
+
+Make sure you
+
+* [*] Do this
+* [ ] And this
+* [*] but not this

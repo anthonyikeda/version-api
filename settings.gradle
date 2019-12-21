@@ -1,0 +1,6 @@
+rootProject.name = 'version-api'
+
+include "apis:customerV1"
+include "apis:customerV2"
+
+include "domains:data-access"
