@@ -1,8 +1,10 @@
 = Version API
 Anthony Ikeda <anthony.ikeda@cognizant.com>
-
+version 1.0.0
+:toc: right
 :icons: font
 
+== Testing the references
 [source,java]
 ----
 public class Customer {
