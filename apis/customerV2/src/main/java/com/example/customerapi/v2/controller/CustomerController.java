@@ -25,4 +25,9 @@ public class CustomerController {
     public ResponseEntity<Void> createCustomer(@RequestBody CustomerDTO dto) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
+
+    @PatchMapping("/{customer_id}")
+    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable("customer_id") String customerId, @RequestBody CustomerDTO toUpdate) {
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    }
 }

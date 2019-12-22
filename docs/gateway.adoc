@@ -1,0 +1,52 @@
+= Gateway setup
+Anthony Ikeda <anthony.ikeda@gmail.com>
+version v1.0.0
+:toc: right
+:listing-caption: Listing
+:icons: font
+
+== Routes
+
+=== Spring Cloud Gateway
+.application.yaml
+[source,yaml]
+----
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: customer_v1
+          uri: http://localhost:8070
+          predicates:
+            - Header=Accept, (version=1)
+            - Path=/customer/**
+          filters:
+            - PrefixPath=/v1
+        - id: customer_v2
+          uri: http://localhost:8060
+          predicates:
+            - Header=Accept, (version=2)
+            - Path=/customer/**
+          filters:
+            - PrefixPath=/v2
+----
+
+
+=== Traefik
+
+.Traefik Config
+[source,yaml]
+----
+TBD: When we get there
+----
+
+=== NGINX
+
+.server.conf
+[source,hcl]
+----
+worker '' {
+
+}
+----
+
