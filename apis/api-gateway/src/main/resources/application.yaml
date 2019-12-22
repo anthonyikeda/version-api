@@ -16,3 +16,9 @@ spring:
             - Header=Accept,.*(version=2)
           filters:
             - PrefixPath=/v2
+        - id: customer_default
+          uri: http://localhost:8060
+          predicates:
+            - Path=/customer/*
+          filters:
+            - PrefixPath=/v2
