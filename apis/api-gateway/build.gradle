@@ -2,6 +2,7 @@ plugins {
     id "java"
     id 'io.spring.dependency-management'
     id 'org.springframework.boot'
+    id 'com.google.cloud.tools.jib' version '1.8.0'
 }
 
 repositories {
@@ -23,5 +24,19 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+jib {
+    from {
+        image = "openjdk:13-slim"
+    }
+    to {
+        image = "anthonyikeda/customer-gateway"
+        credHelper = "osxkeychain"
+    }
+    container {
+        mainClass = "com.example.customer.gateway.GatewayApplication"
+        creationTime = "USE_CURRENT_TIMESTAMP"
     }
 }

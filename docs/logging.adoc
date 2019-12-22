@@ -1,0 +1,55 @@
+= Logging
+Anthony Ikeda <anthony.ikeda@gmail.com>
+version 1.0.0
+:toc: right
+:icons: font
+:listing-caption: Listing
+
+== Logging Stack
+
+The current stack for consolidated logging is ElasticSearch, Filebeat and Kibana. By default you need to be running
+the `integration` spring profile to enable the log to write to the correct directories.
+
+Starting the basic logging stack requires running ElasticSearch and Kibana in docker:
+
+.Starting ElasticSearch and Kibana
+[source,bash]
+----
+$ cd devops
+$ docker-compose up
+----
+
+This will start ElasticSearch and Kibana. You can access Kibana on `http://localhost:5106`.
+
+=== Starting FileBeat
+
+First, you need to install Filebeat:
+
+.Installing FileBeat
+[source,bash]
+----
+$ brew tap elastic/tap
+$ brew install elastic/tap/filebeat-full
+----
+
+Once it's installed you need to ensure the configuration file (filebeat.yml) is owned by root and start Filebeat:
+
+.Running Filebeat
+[source,bash]
+----
+$ sudo filebeat -c /Users/anthonyikeda/work/git_cloud/version-api/devops/filebeat/filebeat.yml
+----
+
+Filebeat should be reading the follwing files:
+
+* [*] ~/data/logs/spring/gateway/application.log
+* [*] ~/data/logs/spring/customerV1/application.log
+* [*] ~/data/logs/spring/customerV2/application.log
+
+=== Reading the logs in Kibana
+
+When starting up Kibana you need to set an index. The index that is used by Filebeat is:
+
+`filebeat-*`
+
+
