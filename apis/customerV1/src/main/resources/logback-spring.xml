@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<configuration>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="integration">
+        <appender name="File" class="ch.qos.logback.core.FileAppender">
+            <file>/Users/anthonyikeda/data/logs/spring/customerV1/application.log</file>
+            <encoder>
+                <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="com.example.customerapi.v1" level="DEBUG" />
+
+        <root level="DEBUG">
+            <appender-ref ref="File"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="docker">
+        <appender name="File" class="ch.qos.logback.core.FileAppender">
+            <file>/app/data/logs/spring/customerV1/application.log</file>
+            <encoder>
+                <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="DEBUG">
+            <appender-ref ref="File"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="Console"/>
+    </root>
+</configuration>

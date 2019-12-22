@@ -2,7 +2,9 @@
 Anthony Ikeda <anthony.ikeda@cognizant.com>
 :source-highlighter: prettify
 :icons: font
+:listing-caption: Listing
 
+.The Customer domain object
 [source,java]
 ----
 public class Customer {
@@ -41,15 +43,35 @@ public class Address {
 <.> and move the `Customer.city` value to here.
 
 
-WARNING: Anyway what was I saying?
+== Getting Started
 
-CAUTION: This is a caution
+* [ ] Create the database
+* [ ] Migrate the tables
+* [ ] Load some data (TBD)
 
-IMPORTANT: If you really need to go you must go!
+== Setting up the Database
 
+We first require a user and database to enable migrations:
 
-Make sure you
+.Creating the database and the user
+[source,sql]
+----
+postgres=# create database customers;
+CREATE DATABASE
+postgres=# create user customer_admin with password 'letmein';
+CREATE USER
+postgres=# grant all on database customers to customer_admin;
+GRANT
+----
 
-* [*] Do this
-* [ ] And this
-* [*] but not this
+Then migrate the database:
+
+.Migrating the database
+[source,bash]
+----
+$ ./gradlew domains:data-access:flywayMigrate
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed
+----
+
